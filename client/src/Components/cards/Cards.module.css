@@ -1,0 +1,9 @@
+.container{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    /* Para que valla para abajo*/
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
