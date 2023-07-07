@@ -5,3 +5,11 @@
     border-radius: 15px;
     border: 1px solid black;
 }
+
+.btn{
+    margin-top: 35px;
+    margin-bottom: 25px;
+    font-size:30px;
+    color: #0ccac4;
+    font-family: "Bigelow Rules";
+}

@@ -1,14 +1,17 @@
-import React from "react";
 
-const SearchBar = ()=> {
+import styles from "./SearchBar.module.css";
+
+const SearchBar = ({ handleSubmit, handleChange }) => {
   return (
-    <>
-      <form>
-        <input type="text" name="search" placeholder="Buscar..." />
-        <button type="submit">Buscar</button>
+    <div className={styles.searchBox}>
+      <form onChange={handleChange}>
+        <input type="search" name="search" placeholder="Buscar..." />
+        <button type="submit" onClick={handleSubmit}>
+          Buscar
+        </button>
       </form>
-    </>
+    </div>
   );
-}
+};
 
 export default SearchBar;

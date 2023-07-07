@@ -1,20 +1,19 @@
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import {Inicio, Home, Form, Detail} from './Views/index'
-import NavBar from "./Components/Navbar/NavBar";
+import { Inicio, Home, Form, Detail } from "./Views/index";
+import NavBar from './Components/Navbar/NavBar'
+
 
 function App() {
-  const location = useLocation()
-
+  const location = useLocation();
   return (
     <>
-    {location.pathname !== '/' && <NavBar/> }
-      
+      {location.pathname !== "/" && <NavBar />}
       <Routes>
-        <Route path="/" element={<Inicio />}/>
-        <Route path="/home" element={<Home />}/>
-        <Route path="/detail" element={<Detail />}/>
-        <Route path="/form" element={<Form />}/>
+        <Route path="/" element={<Inicio />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/form" element={<Form />} />
       </Routes>
     </>
   );

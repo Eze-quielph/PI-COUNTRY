@@ -1,9 +1,10 @@
 .container{
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    border-radius: 15px;
-    /* Para que valla para abajo*/
+    width: 85vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-gap: 10px;
+    justify-content: center;
     flex-wrap: wrap; 
     gap: 1rem;
 }
