@@ -1,125 +1,184 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import validate from "./Validate";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../Redux/actions/index";
+import style from "./Form.module.css";
 
 const Form = () => {
+  const allCountries = useSelector((state) => state.Countries);
+
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({
     name: "",
     dificultad: "",
     duracion: "",
     tempodara: "",
-    countryId: "",
+    countryId: [],
   });
 
-  const [error, setError] = useState({
-    name: "",
-    dificultad: "",
-    duracion: "",
-    tempodara: "",
-    countryId: "",
+  const [errors, setErrors] = useState({
+    name: "Debes seleccionar una actividad",
   });
 
-  const validate = (input) => {
-
-    if (!input.name) {
-      setError({
-        error,
-        name: "Este campo es obligatorio",
-      }) 
-      return
-    }
-    if(!input.name > 3 && !input.name < 10){
-      setError({
-        error,
-        name: "El nombre debe tener entre 3 y 10 caracteres",
-      })
-      return
-    }
-    setError({...error, name: ""})
-  };
-
-  const changeHandler = (event) => {
+  const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
 
+    if (property === "pais") {
+      setForm({
+        ...form,
+        countryId: [...form.countryId, value],
+      });
+      setErrors(
+        validate({
+          ...form,
+          [property]: value,
+        })
+      );
+    } else {
+      setForm({
+        ...form,
+        [property]: value,
+      });
+      setErrors(
+        validate({
+          ...form,
+          [property]: value,
+        })
+      );
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(actions.addActivity(form));
+      setForm({
+        name: "",
+        dificultad: "",
+        duracion: "",
+        tempodara: "",
+        countryId: [],
+      });
+      alert("La actividad se creó con éxito");
+    } else {
+      alert("Por favor, completa todos los datos");
+    }
+  };
+
+  const handleDelete = (element) => {
     setForm({
       ...form,
-      [property]: value,
-    });
-    validate({
-      ...form,
-      property: value,
+      countryId: form.countryId.filter((ele) => ele !== element),
     });
   };
 
   return (
-    <form onSubmit={changeHandler}>
-      <h1>Crea una nueva actividad: </h1>
-      <div>
-        <label htmlFor="name">Nombre: </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={form.name}
-          onChange={changeHandler}
-        />
-        
-      </div>
-      <div>
-        <label htmlFor="dificultad">Dificultad: </label>
-        <select
-          type="select"
-          id="dificultad"
-          name="dificultad"
-          value={form.dificultad}
-          onChange={changeHandler}
-          required
-        >
-          <option value="">Seleccione una opción</option>
-          <option value="tipo1">1</option>
-          <option value="tipo2">2</option>
-          <option value="tipo3">3</option>
-          <option value="tipo4">4</option>
-          <option value="tipo5">5</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="duracion">Duracion: </label>
-        <input
-          type="time"
-          id="duracion"
-          name="duracion"
-          value={form.duracion}
-          onChange={changeHandler}
-        />
-      </div>
-      <div>
-        <label htmlFor="tempodara">Tempodara: </label>
-        <select
-          id="tempodara"
-          name="tempodara"
-          value={form.tempodara}
-          onChange={changeHandler}
-        >
-          <option value="">Seleccione una opción</option>
-          <option value="opcion1">Opción 1</option>
-          <option value="opcion2">Opción 2</option>
-          <option value="opcion3">Opción 3</option>
-          <option value="opcion4">Opción 4</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="country">Country: </label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={form.country}
-          onChange={changeHandler}
-        />
-      </div>
-      {error.name ? null :  <button type="submit">Submit</button>}
-     
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="">Nombre: </label>
+          <select name="name" value={form.name} onChange={handleChange}>
+            <option value="" disabled>
+              Selecciona la actividad
+            </option>
+            <option value="Trekking">Trekking</option>
+            <option value="Caminata">Caminata</option>
+            <option value="Bike Tour">Bike Tour</option>
+            <option value="City Tour">City Tour</option>
+            <option value="Gastronomic Circuit">Gastronomic Circuit</option>
+            <option value="Rapel">Rapel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Museum Circuit">Museum Circuit</option>
+            <option value="Free Choice">Free Choice</option>
+          </select>
+          {errors.name && <p>{errors.name}</p>}
+        </div>
+
+        <div>
+          <label>Dificultad: </label>
+          <select
+            name="dificultad"
+            value={form.dificultad}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Seleccione un valor
+            </option>
+            <option value="1">1 (Dificultad Nula)</option>
+            <option value="2">2 (Dificultad Baja)</option>
+            <option value="3">3 (Dificultad Media)</option>
+            <option value="4">4 (Dificultad Elevada)</option>
+            <option value="5">5 (Dificultad Extrema)</option>
+          </select>
+          {errors.dificultad && (
+            <p className={style.error}>{errors.dificultad}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="duracion">Duración (en Horas): </label>
+          <input
+            type="number"
+            name="duracion"
+            value={form.duracion}
+            onChange={handleChange}
+            min={1}
+            max={6}
+          />
+          {errors.duracion && <p>{errors.duracion}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="tempodara">Temporada: </label>
+          <select
+            name="tempodara"
+            value={form.tempodara}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Seleccione un valor
+            </option>
+            <option value="Verano">Verano</option>
+            <option value="Otoño">Otoño</option>
+            <option value="Invierno">Invierno</option>
+            <option value="Primavera">Primavera</option>
+          </select>
+          {errors.tempodara && <p>{errors.tempodara}</p>}
+        </div>
+        <div className={style.line}>
+          <label htmlFor="">País / Países: </label>
+          <select name="pais" className={style.select} onChange={handleChange}>
+            <option value="" disabled>
+              Seleccioná el/los países
+            </option>
+            {allCountries?.map((country) => (
+              <option value={country.id} key={country.id}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+          {errors.pais && <p>{errors.pais}</p>}
+          <div>
+            {form.countryId?.map((element) => (
+              <div key={element}>
+                <button
+                  onClick={() => {
+                    handleDelete(element);
+                  }}
+                >
+                  {element}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <button type="submit">Crear Actividad</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

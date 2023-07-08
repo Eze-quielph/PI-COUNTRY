@@ -1,11 +1,11 @@
 import Card from "../Card/Card";
 import style from './Cards.module.css'
 
-const Cards = ({Countries}) => {
+const Cards = ({CountriesFilter}) => {
 
   return (
     <div className={style.container}>
-      {Countries.map((country) => {
+      {CountriesFilter.map((country) => {
         return (
           <Card
             key={country.id}

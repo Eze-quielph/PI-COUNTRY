@@ -1,7 +1,14 @@
 import { NavLink, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountryDetails } from "../../Redux/actions/index";
+import { getCountryDetails, cleanDetail } from "../../Redux/actions/index";
+
+/**
+ * Componente de detalle de país.
+ * Obtiene los detalles de un país específico mediante una llamada a la acción `getCountryDetails`.
+ * Muestra información como el nombre, la bandera, el continente, la capital, la subregión, el área y la población del país.
+ * También proporciona un enlace para volver a la página de inicio.
+ */
 
 const Detail = () => {
   const { id } = useParams();
@@ -9,10 +16,13 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getCountryDetails(id));
+    return ()=>{
+      dispatch(cleanDetail())
+    }
   }, [dispatch]);
   
-  const country = useSelector((state) => state.CountryFilter);
-  console.log(country);
+  const country = useSelector((state) => state.countryDetail);
+ 
 
   return (
     <div>

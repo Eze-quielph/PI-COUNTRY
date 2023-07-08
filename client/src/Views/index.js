@@ -1,6 +1,6 @@
 import Detail from './DetailPage/Detail'
 import Form from './FormPage/Form'
-import Home from './HomePage/HomePage'
+import HomeContainer from './HomePage/HomeContainer'
 import Inicio from './Inicio/Inicio'
 
-export {Detail, Form, Home, Inicio}
+export {Detail, Form, HomeContainer, Inicio}
