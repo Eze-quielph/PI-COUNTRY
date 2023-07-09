@@ -5,9 +5,11 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_COUNTRY_DETAILS = "GET_COUNTRY_DETAILS";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const FILTER_COUNTRY_CONTINENTE = "FILTER_COUNTRY_CONTINENTE";
-
+export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES"
 export const ORDEN = "ORDEN";
 export const ADD_ACTIVITIES = "ADD_ACTIVITIES";
+export const GET_ACTIVITIES = "GET_ACTIVITIES"
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 
 export const getCountry = () => {
   return async function (dispatch) {
@@ -57,6 +59,12 @@ export const filterCountryByContinente = (input) => {
   };
 };
 
+export const filterActivities = (input) => {
+  return {
+    type: FILTER_ACTIVITIES,
+    payload: input,
+  };
+}
 
 export const filterOrder = (payload) => {
   return {
@@ -79,3 +87,22 @@ export const addActivity = (activities) => {
   };
 };
 
+export const getActivities = () =>{
+  return async (dispatch)=> {
+      try {
+          const { data } = await axios.get("http://localhost:3001/activities");
+          return dispatch({ type: GET_ACTIVITIES, payload: data});
+      } catch (error) {
+          alert("Error: " + error.response.data.error);
+      }
+  }
+}
+
+//Paginado
+
+export const setCurrentPage = (page) => {
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: page,
+  };
+};

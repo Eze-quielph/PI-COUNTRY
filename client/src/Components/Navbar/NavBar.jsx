@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import CountryFilters from "./Filter/CountryFilter";
 import CountryOrder from "./Filter/CountryOrder";
 
 /**
- * Componente que representa la barra de navegación.
+ * Componente de la barra de navegación.
  * Permite al usuario navegar entre las diferentes secciones de la aplicación y buscar países por nombre.
  */
 const NavBar = () => {
@@ -17,15 +17,15 @@ const NavBar = () => {
   const [searchString, setSearchString] = useState("");
 
   /**
-   * Maneja el envío del formulario de búsqueda de países.
-   * Realiza una búsqueda de país utilizando el valor de `searchString` y actualiza los resultados en la aplicación.
+   * Manejador del envío del formulario de búsqueda de países.
+   * Realiza una búsqueda de países utilizando el valor de `searchString` y actualiza los resultados en la aplicación.
    */
   const handleSubmit = () => {
     dispatch(getCountryByName(searchString));
   };
 
   /**
-   * Maneja el cambio en el campo de búsqueda.
+   * Manejador del cambio en el campo de búsqueda.
    * Actualiza el valor de `searchString` con el valor ingresado por el usuario.
    * @param {object} event - Evento del cambio en el campo de búsqueda.
    */

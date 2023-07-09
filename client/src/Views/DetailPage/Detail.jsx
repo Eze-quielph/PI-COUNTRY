@@ -9,20 +9,18 @@ import { getCountryDetails, cleanDetail } from "../../Redux/actions/index";
  * Muestra información como el nombre, la bandera, el continente, la capital, la subregión, el área y la población del país.
  * También proporciona un enlace para volver a la página de inicio.
  */
-
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCountryDetails(id));
-    return ()=>{
-      dispatch(cleanDetail())
-    }
-  }, [dispatch]);
-  
+    return () => {
+      dispatch(cleanDetail());
+    };
+  }, [dispatch, id]);
+
   const country = useSelector((state) => state.countryDetail);
- 
 
   return (
     <div>

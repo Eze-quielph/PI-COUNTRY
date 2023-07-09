@@ -4,9 +4,11 @@ import {
   GET_COUNTRY_DETAILS,
   CLEAN_DETAIL,
   FILTER_COUNTRY_CONTINENTE,
-
   ORDEN,
-  ADD_ACTIVITIES
+  ADD_ACTIVITIES,
+  GET_ACTIVITIES,
+  FILTER_ACTIVITIES,
+  SET_CURRENT_PAGE
 } from "../actions/index";
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
   CountryFilter: [],
   countryDetail: [],
   allActivitiesFilter: [],
-  allActivities:[]
+  allActivities: [],
+  currentPage:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -42,11 +45,11 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case CLEAN_DETAIL:
-      return{
-          ...state, 
-          countryDetail: []
-      }
-      //Filtro por continente
+      return {
+        ...state,
+        countryDetail: [],
+      };
+    //Filtro por continente
     case FILTER_COUNTRY_CONTINENTE: {
       const allCountries = [...state.Countries];
 
@@ -64,43 +67,81 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
+    case FILTER_ACTIVITIES: {
+      if (action.payload !== "All") {
+        const { Countries } = state.allActivities.find((a) => {
+          return a.name === action.payload;
+        });
+        if (Countries) {
+          return {
+            ...state,
+            CountryFilter: Countries,
+            allActivitiesFilter: Countries,
+          };
+        }
+      }
+      return {
+        ...state,
+        CountryFilter: state.Countries,
+      };
+    }
+
     //Orden por nombre y poblacion
     case ORDEN: {
-      const allCountries1 = state.CountryFilter
+      const allCountries1 = state.CountryFilter;
 
-       let allCountriesFilterByOrder
+      let allCountriesFilterByOrder;
 
-      if(action.payload === 'A'){
-          allCountriesFilterByOrder = allCountries1.sort((a,b) => a.name.localeCompare(b.name))
+      if (action.payload === "A") {
+        allCountriesFilterByOrder = allCountries1.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
       }
 
-      if(action.payload === 'D'){
-          allCountriesFilterByOrder = allCountries1.sort((a,b) => b.name.localeCompare(a.name))
+      if (action.payload === "D") {
+        allCountriesFilterByOrder = allCountries1.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
       }
-      
-      if(action.payload === 'G'){
-        allCountriesFilterByOrder = allCountries1.sort((a,b) => a.poblacion - b.poblacion)
-    }
 
-    if(action.payload === 'P'){
-        allCountriesFilterByOrder = allCountries1.sort((a,b) => b.poblacion - a.poblacion)
-    }
-      
-      return{
-          ...state,
-          CountryFilter: [...allCountriesFilterByOrder]
+      if (action.payload === "G") {
+        allCountriesFilterByOrder = allCountries1.sort(
+          (a, b) => a.poblacion - b.poblacion
+        );
       }
+
+      if (action.payload === "P") {
+        allCountriesFilterByOrder = allCountries1.sort(
+          (a, b) => b.poblacion - a.poblacion
+        );
+      }
+
+      return {
+        ...state,
+        CountryFilter: [...allCountriesFilterByOrder],
+      };
     }
     //Guardado de Actividades
     case ADD_ACTIVITIES: {
       return {
         ...state,
-        CountryFilter: [],
         allActivities: action.payload,
         allActivitiesFilter: action.payload,
       };
     }
+    case GET_ACTIVITIES: {
+      return {
+        ...state,
+        allActivities: action.payload,
+      };
+    }
 
+    //Paginado
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
     default:
       return { ...state };
   }
