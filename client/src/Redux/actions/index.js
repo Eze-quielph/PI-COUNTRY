@@ -9,6 +9,7 @@ export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES"
 export const ORDEN = "ORDEN";
 export const ADD_ACTIVITIES = "ADD_ACTIVITIES";
 export const GET_ACTIVITIES = "GET_ACTIVITIES"
+
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 
 export const getCountry = () => {
@@ -97,6 +98,7 @@ export const getActivities = () =>{
       }
   }
 }
+
 
 //Paginado
 

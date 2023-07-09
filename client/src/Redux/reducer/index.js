@@ -8,7 +8,7 @@ import {
   ADD_ACTIVITIES,
   GET_ACTIVITIES,
   FILTER_ACTIVITIES,
-  SET_CURRENT_PAGE
+  SET_CURRENT_PAGE,
 } from "../actions/index";
 
 const initialState = {
@@ -17,7 +17,7 @@ const initialState = {
   countryDetail: [],
   allActivitiesFilter: [],
   allActivities: [],
-  currentPage:[]
+  currentPage: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -66,17 +66,21 @@ const rootReducer = (state = initialState, action) => {
         CountryFilter: continentFiltered,
       };
     }
-
+    //filtro por actividad
     case FILTER_ACTIVITIES: {
       if (action.payload !== "All") {
-        const { Countries } = state.allActivities.find((a) => {
-          return a.name === action.payload;
-        });
-        if (Countries) {
+        const activity = state.allActivities.find((a) => a.name === action.payload);
+        if (activity && activity.Countries) {
           return {
             ...state,
-            CountryFilter: Countries,
-            allActivitiesFilter: Countries,
+            CountryFilter: activity.Countries,
+            allActivitiesFilter: activity.Countries,
+          };
+        } else {
+          // No se encontró un país relacionado, devolver array vacío
+          return {
+            ...state,
+            CountryFilter: [],
           };
         }
       }
@@ -85,42 +89,58 @@ const rootReducer = (state = initialState, action) => {
         CountryFilter: state.Countries,
       };
     }
+    
+    /*  case FILTER_ACTIVITIES:{
+      if (action.payload!== "All") {
+        const activity = state.allActivities.find(a => a.name === action.payload)
+        if(activity && activity.Countries) {
+          return {
+            ...state,
+            CountryFilter: activity.Countrie,
+            allActivitiesFilter: activity.Countries,
+          }
+        }
+      }
+      return {
+        ...state,
+        CountryFilter: state.Countries
+      }
+    } */
 
     //Orden por nombre y poblacion
     case ORDEN: {
-      const allCountries1 = state.CountryFilter;
-
-      let allCountriesFilterByOrder;
-
+      const allCountries1 = [...state.CountryFilter];
+    
       if (action.payload === "A") {
-        allCountriesFilterByOrder = allCountries1.sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
+        allCountries1.sort((a, b) => a.name.localeCompare(b.name));
       }
-
+    
       if (action.payload === "D") {
-        allCountriesFilterByOrder = allCountries1.sort((a, b) =>
-          b.name.localeCompare(a.name)
-        );
+        allCountries1.sort((a, b) => b.name.localeCompare(a.name));
       }
-
+    
       if (action.payload === "G") {
-        allCountriesFilterByOrder = allCountries1.sort(
-          (a, b) => a.poblacion - b.poblacion
-        );
+        allCountries1.sort((a, b) => a.poblacion - b.poblacion);
       }
-
+    
       if (action.payload === "P") {
-        allCountriesFilterByOrder = allCountries1.sort(
-          (a, b) => b.poblacion - a.poblacion
-        );
+        allCountries1.sort((a, b) => b.poblacion - a.poblacion);
       }
-
+    
+      if (action.payload === "All") {
+        return {
+          ...state,
+          CountryFilter: [...state.Countries]
+        };
+      }
+    
       return {
         ...state,
-        CountryFilter: [...allCountriesFilterByOrder],
+        CountryFilter: allCountries1
       };
     }
+    
+
     //Guardado de Actividades
     case ADD_ACTIVITIES: {
       return {

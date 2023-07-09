@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { filterOrder } from "../../../Redux/actions/index";
 
 /**
@@ -9,28 +9,35 @@ import { filterOrder } from "../../../Redux/actions/index";
  */
 const CountryOrder = () => {
   const dispatch = useDispatch();
-  const actividades = useSelector((state) => state.allActivities);
 
   /**
-   * Manejador de cambio de ordenamiento.
-   * Dispara la acción de ordenar países por población o nombre.
+   * Manejador de cambio de ordenamiento por población.
+   * Dispara la acción de ordenar países por población.
    * @param {object} event - Evento del selector.
    */
-  const handleOrder = (event) => {
+  const handlePopulationOrder = (event) => {
     dispatch(filterOrder(event.target.value));
-    console.log(actividades);
+  };
+
+  /**
+   * Manejador de cambio de ordenamiento por nombre.
+   * Dispara la acción de ordenar países por nombre.
+   * @param {object} event - Evento del selector.
+   */
+  const handleNameOrder = (event) => {
+    dispatch(filterOrder(event.target.value));
   };
 
   return (
     <div>
       <p>Ordenar por Población</p>
-      <select onChange={handleOrder}>
+      <select onChange={handlePopulationOrder}>
         <option value="All">Seleccione uno</option>
         <option value="G">Ascendente</option>
         <option value="P">Descendente</option>
       </select>
       <p>Ordenar por Nombre</p>
-      <select onChange={handleOrder}>
+      <select onChange={handleNameOrder}>
         <option value="All">Seleccione uno</option>
         <option value="A">Ascendente</option>
         <option value="D">Descendente</option>

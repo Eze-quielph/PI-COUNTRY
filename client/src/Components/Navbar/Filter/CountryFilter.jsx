@@ -9,7 +9,7 @@ import { filterCountryByContinente, filterActivities } from "../../../Redux/acti
  */
 const CountryFilters = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.Countries);
+  const countries = useSelector((state) => state.allActivities);
 
   // Opciones para el filtro de continentes
   const continenteOptions = [
@@ -43,7 +43,7 @@ const CountryFilters = () => {
    */
   const handleFilterContinente = (event) => {
     dispatch(filterCountryByContinente(event.target.value));
-    console.log(countries);
+    
   };
 
   /**
@@ -53,7 +53,7 @@ const CountryFilters = () => {
    */
   const handleFilterActivity = (event) => {
     dispatch(filterActivities(event.target.value));
-    console.log("FilterActivity");
+    console.log(countries);
   };
 
   return (
