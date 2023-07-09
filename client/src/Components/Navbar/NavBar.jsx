@@ -35,9 +35,15 @@ const NavBar = () => {
 
   return (
     <div className={style.divContainer}>
+    <div>
       <NavLink to="/home" className={style.btn}>
         Home
       </NavLink>
+      <NavLink to="/form" className={style.btn}>
+        Form
+      </NavLink>
+    </div>
+    <div className={style.searchBarContainer}>
       {location.pathname !== "/form" && (
         <SearchBar
           searchString={searchString}
@@ -45,13 +51,12 @@ const NavBar = () => {
           handleSubmit={handleSubmit}
         />
       )}
-
-      <NavLink to="/form" className={style.btn}>
-        Form
-      </NavLink>
+    </div>
+    <div className={style.filterOrderContainer}>
       {location.pathname !== "/form" && <CountryFilters />}
       {location.pathname !== "/form" && <CountryOrder />}
     </div>
+  </div>
   );
 };
 

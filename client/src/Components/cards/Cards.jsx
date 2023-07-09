@@ -1,12 +1,8 @@
-import React from "react";
 import Card from "../Card/Card";
 import style from './Cards.module.css'
 
-/**
- * Componente que muestra una lista de tarjetas de países.
- * Recibe como prop `CountriesFilter` que contiene la lista de países a mostrar.
- */
-const Cards = ({ CountriesFilter }) => {
+const Cards = ({CountriesFilter}) => {
+
   return (
     <div className={style.container}>
       {CountriesFilter.map((country) => {

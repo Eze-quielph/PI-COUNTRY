@@ -1,15 +1,31 @@
 .divContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 15px;
-    border: 1px solid black;
-}
-
-.btn{
-    margin-top: 35px;
-    margin-bottom: 25px;
-    font-size:30px;
-    color: #0ccac4;
-    font-family: "Bigelow Rules";
-}
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .btn {
+    margin-right: 10px;
+  }
+  
+  .searchBarContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .filterOrderContainer {
+    display: flex;
+    align-items: center;
+  }
+ 
+  
+  .btn {
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    color: red;
+  }

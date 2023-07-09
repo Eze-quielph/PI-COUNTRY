@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Cards from "../../Components/cards/Cards";
-import Pagination from "./Pagination";
+import Pagination from "./Pagination/Pagination";
 import styles from "./HomePage.module.css";
 
 /**
@@ -25,15 +25,19 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.home}>Home</h2>
-      <Cards CountriesFilter={currentItems} />
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={CountriesFilter.length}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+    <div>
+      <aside className={styles.pagination}>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={CountriesFilter.length}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </aside>
+      <section className={styles.cards}>
+        <h2 className={styles.home}>Countries</h2>
+        <Cards CountriesFilter={currentItems} className={styles.card} />
+      </section>
     </div>
   );
 };

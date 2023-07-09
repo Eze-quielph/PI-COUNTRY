@@ -1,18 +1,36 @@
-.cardContainer{
-    display: flex;
-    flex-direction: column;
-    background-color: #95dada;
-    border: 1px solid grey;
-    border-radius: 10px;
-    padding: 25px;
-    margin: 25px;
-    cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-.cardContainer:hover{
-    transform: scale(1.05);
-}
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    text-align: center; /* Alinea el texto en el centro horizontalmente */
+    margin-top: 10px; /* Agrega un margen superior para separar el título de la imagen */
+  }
+  
+  .img {
+    width: 80%;
+    height: auto;
+    border-radius: 5px;
+    display: block; /* Convierte la imagen en un elemento de bloque */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
+    transition: transform 0.3s ease; /* Agrega una transición suave al hacer hover */
+  }
+  
+  .img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; /* Cambia la dirección de flexión a columna */
+    align-items: center;
+    justify-content: center;
+    width: 40vh;
+    height: 40vh;
+    padding: 20px; /* Agrega un espacio interno para separar el contenido de los bordes */
+    margin: 20px;
+  }
+  
