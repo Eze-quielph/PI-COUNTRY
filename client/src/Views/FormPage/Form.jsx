@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import validate from "./Validate";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/actions/index";
-import style from "./Form.module.css";
+import styles from "./Form.module.css";
 
 const Form = () => {
   const allCountries = useSelector((state) => state.Countries);
@@ -76,11 +76,11 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="">Nombre: </label>
-          <select name="name" value={form.name} onChange={handleChange}>
+          <label htmlFor="name">Nombre: </label>
+          <select  id="name" name="name" value={form.name} onChange={handleChange}>
             <option value="" disabled>
               Selecciona la actividad
             </option>
@@ -98,8 +98,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label>Dificultad: </label>
+          <label htmlFor="dificultad" >Dificultad: </label>
           <select
+          id="dificultad"
             name="dificultad"
             value={form.dificultad}
             onChange={handleChange}
@@ -114,12 +115,13 @@ const Form = () => {
             <option value="5">5 (Dificultad Extrema)</option>
           </select>
           {errors.dificultad && (
-            <p className={style.error}>{errors.dificultad}</p>
+            <p className={styles.error}>{errors.dificultad}</p>
           )}
         </div>
         <div>
           <label htmlFor="duracion">Duración (en Horas): </label>
           <input
+          id="duracion"
             type="number"
             name="duracion"
             value={form.duracion}
@@ -134,6 +136,7 @@ const Form = () => {
           <label htmlFor="tempodara">Temporada: </label>
           <select
             name="tempodara"
+            id="tempodara"
             value={form.tempodara}
             onChange={handleChange}
           >
@@ -147,9 +150,9 @@ const Form = () => {
           </select>
           {errors.tempodara && <p>{errors.tempodara}</p>}
         </div>
-        <div className={style.line}>
-          <label htmlFor="">País / Países: </label>
-          <select name="pais" className={style.select} onChange={handleChange}>
+        <div className={styles.line}>
+          <label htmlFor="pais">País / Países: </label>
+          <select name="pais" id="pais" className={styles.select} onChange={handleChange}>
             <option value="" disabled>
               Seleccioná el/los países
             </option>

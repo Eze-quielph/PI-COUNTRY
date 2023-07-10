@@ -35,7 +35,6 @@ const Home = () => {
         />
       </aside>
       <section className={styles.cards}>
-        <h2 className={styles.home}>Countries</h2>
         <Cards CountriesFilter={currentItems} className={styles.card} />
       </section>
     </div>

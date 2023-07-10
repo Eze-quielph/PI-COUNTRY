@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { filterOrder } from "../../../Redux/actions/index";
+import style from "./CountryOrder.module.css";
 
 /**
  * Componente de ordenamiento de países.
@@ -29,19 +30,21 @@ const CountryOrder = () => {
   };
 
   return (
-    <div>
-      <p>Ordenar por Población</p>
-      <select onChange={handlePopulationOrder}>
-        <option value="All">Seleccione uno</option>
-        <option value="G">Ascendente</option>
-        <option value="P">Descendente</option>
-      </select>
-      <p>Ordenar por Nombre</p>
-      <select onChange={handleNameOrder}>
-        <option value="All">Seleccione uno</option>
-        <option value="A">Ascendente</option>
-        <option value="D">Descendente</option>
-      </select>
+    <div className={style.filtersContainer}>
+      <div className={style.section}>
+        <select onChange={handlePopulationOrder} className={style.select}>
+          <option className={style.option} value="All">Ordena por Poblacion</option>
+          <option className={style.option} value="G">Ascendente</option>
+          <option className={style.option} value="P">Descendente</option>
+        </select>
+      </div>
+      <div className={style.section} >
+        <select onChange={handleNameOrder} className={style.select}>
+          <option className={style.option} value="All">Ordenar por Nombre</option>
+          <option className={style.option} value="A">Ascendente</option>
+          <option className={style.option} value="D">Descendente</option>
+        </select>
+      </div>
     </div>
   );
 };

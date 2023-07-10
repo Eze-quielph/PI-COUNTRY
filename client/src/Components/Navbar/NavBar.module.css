@@ -1,31 +1,64 @@
+.btn {
+  /* Estilos base para los botones */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn:hover {
+  /* Estilos al hacer hover en los botones */
+  transform: scale(1.1);
+}
+
+.navLinksContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.btnHome {
+  /* Estilos específicos para el botón "Home" */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-right: 50px;
+}
+
+.btnForm {
+  /* Estilos específicos para el botón "Form" */
+  position: absolute;
+  top: 10px;
+  right: 70px;
+  margin-right: 100px;
+}
+
 .divContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .btn {
-    margin-right: 10px;
-  }
-  
-  .searchBarContainer {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .filterOrderContainer {
-    display: flex;
-    align-items: center;
-  }
- 
-  
-  .btn {
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    color: red;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchBarContainer {
+  margin: 20px;
+}
+
+
+.middleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+
+.filtersContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* Ajusta el margen izquierdo según sea necesario */
+}
+

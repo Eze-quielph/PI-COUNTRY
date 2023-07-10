@@ -22,13 +22,14 @@ const SearchBar = ({ searchString, handleChange, handleSubmit }) => {
     <div className={styles.searchBox}>
       <form onSubmit={handleFormSubmit}>
         <input
+          className={styles.input}
           type="search"
           name="search"
           placeholder="Buscar..."
           value={searchString}
           onChange={handleChange}
         />
-        <button type="submit">Buscar</button>
+        <button className={styles.button} type="submit">Buscar</button>
       </form>
     </div>
   );

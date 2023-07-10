@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterCountryByContinente, filterActivities } from "../../../Redux/actions/index";
+import style from "./CountryOrder.module.css";
 
 /**
  * Componente de filtros de países.
@@ -59,22 +60,25 @@ const CountryFilters = () => {
   return (
     <>
       {/* Selector de continentes */}
-      <select onChange={handleFilterContinente}>
+      <div className={style.section}>
+      <select onChange={handleFilterContinente} className={style.select}>
         {continenteOptions.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option className={style.option} key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-
+          </div>
       {/* Selector de actividades */}
-      <select onChange={handleFilterActivity}>
+      <div className={style.section}>
+      <select onChange={handleFilterActivity} className={style.select}>
         {activityOptions.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option className={style.option} key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
+      </div>
     </>
   );
 };
