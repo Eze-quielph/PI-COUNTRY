@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Cards from "../../Components/cards/Cards";
 import Pagination from "./Pagination/Pagination";
 import styles from "./HomePage.module.css";
+import { useLocation } from "react-router-dom";
 
 /**
  * Componente de la página de inicio.
@@ -13,6 +14,8 @@ const Home = () => {
   const CountriesFilter = useSelector((state) => state.CountryFilter);
   const itemsPerPage = 10; // Número de elementos por página
   const [currentPage, setCurrentPage] = useState(1);
+
+  const location = useLocation();
 
   // Calcular los índices de los elementos a mostrar en la página actual
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -27,12 +30,14 @@ const Home = () => {
   return (
     <div>
       <aside className={styles.pagination}>
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          totalItems={CountriesFilter.length}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
+        {location.pathname != "/detail/:id" && (
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={CountriesFilter.length}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
       </aside>
       <section className={styles.cards}>
         <Cards CountriesFilter={currentItems} className={styles.card} />

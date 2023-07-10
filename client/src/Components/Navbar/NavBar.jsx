@@ -36,15 +36,22 @@ const NavBar = () => {
   return (
     <div className={style.divContainer}>
       <div className={style.navLinksContainer}>
-        <NavLink to="/home" className={`${style.btn} ${style.btnHome}`}>
-          Home
-        </NavLink>
-        <NavLink to="/form" className={`${style.btn} ${style.btnForm}`}>
-          Form
-        </NavLink>
+        <div className={style.navButtonsContainer}>
+          <NavLink to="/home" className={`${style.btn} ${style.btnHome}`}>
+            Country
+          </NavLink>
+          <NavLink
+            to="/activity"
+            className={`${style.btn} ${style.btnActivity}`}
+          >
+            Activity
+          </NavLink>
+          <NavLink to="/form" className={`${style.btn} ${style.btnForm}`}>
+            Form
+          </NavLink>
+        </div>
       </div>
       <div className={style.middleContainer}>
-        
         <div className={style.searchBarContainer}>
           {location.pathname !== "/form" && (
             <SearchBar
@@ -56,11 +63,10 @@ const NavBar = () => {
         </div>
         <div className={style.filtersContainer}>
           {location.pathname !== "/form" && <CountryFilters />}
-       
-        
+
           {location.pathname !== "/form" && <CountryOrder />}
+        </div>
       </div>
-     </div>
     </div>
   );
 };

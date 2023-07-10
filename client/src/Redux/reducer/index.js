@@ -69,7 +69,9 @@ const rootReducer = (state = initialState, action) => {
     //filtro por actividad
     case FILTER_ACTIVITIES: {
       if (action.payload !== "All") {
-        const activity = state.allActivities.find((a) => a.name === action.payload);
+        const activity = state.allActivities.find(
+          (a) => a.name === action.payload
+        );
         if (activity && activity.Countries) {
           return {
             ...state,
@@ -89,57 +91,39 @@ const rootReducer = (state = initialState, action) => {
         CountryFilter: state.Countries,
       };
     }
-    
-    /*  case FILTER_ACTIVITIES:{
-      if (action.payload!== "All") {
-        const activity = state.allActivities.find(a => a.name === action.payload)
-        if(activity && activity.Countries) {
-          return {
-            ...state,
-            CountryFilter: activity.Countrie,
-            allActivitiesFilter: activity.Countries,
-          }
-        }
-      }
-      return {
-        ...state,
-        CountryFilter: state.Countries
-      }
-    } */
 
     //Orden por nombre y poblacion
     case ORDEN: {
       const allCountries1 = [...state.CountryFilter];
-    
+
       if (action.payload === "A") {
         allCountries1.sort((a, b) => a.name.localeCompare(b.name));
       }
-    
+
       if (action.payload === "D") {
         allCountries1.sort((a, b) => b.name.localeCompare(a.name));
       }
-    
+
       if (action.payload === "G") {
         allCountries1.sort((a, b) => a.poblacion - b.poblacion);
       }
-    
+
       if (action.payload === "P") {
         allCountries1.sort((a, b) => b.poblacion - a.poblacion);
       }
-    
+
       if (action.payload === "All") {
         return {
           ...state,
-          CountryFilter: [...state.Countries]
+          CountryFilter: [...state.Countries],
         };
       }
-    
+
       return {
         ...state,
-        CountryFilter: allCountries1
+        CountryFilter: allCountries1,
       };
     }
-    
 
     //Guardado de Actividades
     case ADD_ACTIVITIES: {

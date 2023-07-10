@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCountry, getActivities } from "../../Redux/actions/index";
 import Home from "./HomePage";
 
