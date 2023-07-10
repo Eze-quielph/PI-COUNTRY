@@ -24,31 +24,23 @@ const Form = () => {
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
+  
+    let updatedForm = {
+      ...form,
+      [property]: value,
+    };
+  
     if (property === "pais") {
-      setForm({
-        ...form,
+      updatedForm = {
+        ...updatedForm,
         countryId: [...form.countryId, value],
-      });
-      setErrors(
-        validate({
-          ...form,
-          [property]: value,
-        })
-      );
-    } else {
-      setForm({
-        ...form,
-        [property]: value,
-      });
-      setErrors(
-        validate({
-          ...form,
-          [property]: value,
-        })
-      );
+      };
     }
+  
+    setForm(updatedForm);
+    setErrors(validate(updatedForm));
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

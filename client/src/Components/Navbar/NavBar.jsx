@@ -51,22 +51,22 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-      <div className={style.middleContainer}>
-        <div className={style.searchBarContainer}>
-          {location.pathname !== "/form" && (
+      {location.pathname === "/home" && (
+        <div className={style.middleContainer}>
+          <div className={style.searchBarContainer}>
             <SearchBar
               searchString={searchString}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
             />
-          )}
-        </div>
-        <div className={style.filtersContainer}>
-          {location.pathname !== "/form" && <CountryFilters />}
+          </div>
+          <div className={style.filtersContainer}>
+            <CountryFilters />
 
-          {location.pathname !== "/form" && <CountryOrder />}
+            <CountryOrder />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

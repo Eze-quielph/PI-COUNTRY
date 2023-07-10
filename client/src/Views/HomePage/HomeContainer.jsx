@@ -9,13 +9,13 @@ import Home from "./HomePage";
  * y mostrarlos en la página de inicio.
  */
 const HomeContainer = () => {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCountry());
     dispatch(getActivities());
   }, []);
-
+ */
   return <Home />;
 };
 

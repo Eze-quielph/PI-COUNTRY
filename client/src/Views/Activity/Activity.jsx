@@ -18,7 +18,6 @@ const ActivityCard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Obtener las actividades cuando el componente se monta
     dispatch(getActivities());
   }, [dispatch]);
 
@@ -27,8 +26,7 @@ const ActivityCard = () => {
       <h1 className={styles.title}>Activities</h1>
       <div className={styles.container}>
         <Suspense fallback={<PantallaCarga />}>
-          {/* Renderizar las actividades si están disponibles */}
-          {actividades &&
+          {Array.isArray(actividades) &&
             actividades.map((actividad) => (
               <Actividad key={actividad.id} activity={actividad} />
             ))}
@@ -37,5 +35,6 @@ const ActivityCard = () => {
     </div>
   );
 };
+
 
 export default ActivityCard;
