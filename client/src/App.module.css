@@ -1,0 +1,18 @@
+
+.fondo {
+    background-image: radial-gradient(
+      circle at 40.28% 29.15%,
+      #f5ffff 0,
+      #f4ffff 10%,
+      #f4ffff 20%,
+      #f3ffff 30%,
+      #f1faf9 40%,
+      #efefef 50%,
+      #ece4e6 60%,
+      #e8d9e0 70%,
+      #e3d0dc 80%,
+      #dec8d9 90%,
+      #d7c2d7 100%
+    );
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

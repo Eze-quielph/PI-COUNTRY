@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import {
   Inicio,
@@ -24,7 +23,7 @@ function App() {
     <>
       {location.pathname !== "/" && <NavBar />}
       <Routes>
-        <Route path="/" element={<Inicio />} />
+        <Route path="/" element={<Inicio />}/>
         <Route path="/home" element={<HomeContainer />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/form" element={<Form />} />

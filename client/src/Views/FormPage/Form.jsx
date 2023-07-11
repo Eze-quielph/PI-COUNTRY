@@ -86,7 +86,7 @@ const Form = () => {
             <option value="Museum Circuit">Museum Circuit</option>
             <option value="Free Choice">Free Choice</option>
           </select>
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className={styles.error}>{errors.name}</p>}
         </div>
 
         <div>
@@ -121,7 +121,7 @@ const Form = () => {
             min={1}
             max={6}
           />
-          {errors.duracion && <p>{errors.duracion}</p>}
+          {errors.duracion && <p className={styles.error}>{errors.duracion}</p>}
         </div>
 
         <div>
@@ -140,7 +140,7 @@ const Form = () => {
             <option value="Invierno">Invierno</option>
             <option value="Primavera">Primavera</option>
           </select>
-          {errors.tempodara && <p>{errors.tempodara}</p>}
+          {errors.tempodara && <p className={styles.error}>{errors.tempodara}</p>}
         </div>
         <div className={styles.line}>
           <label htmlFor="pais">País / Países: </label>
@@ -154,7 +154,7 @@ const Form = () => {
               </option>
             ))}
           </select>
-          {errors.pais && <p>{errors.pais}</p>}
+          {errors.pais && <p className={styles.error}>{errors.pais}</p>}
           <div>
             {form.countryId?.map((element) => (
               <div key={element}>
