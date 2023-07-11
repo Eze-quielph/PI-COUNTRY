@@ -9,6 +9,7 @@ import {
   GET_ACTIVITIES,
   FILTER_ACTIVITIES,
   SET_CURRENT_PAGE,
+  DELETE_ACTIVITY
 } from "../actions/index";
 
 const initialState = {
@@ -137,8 +138,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allActivities: action.payload,
+        allActivitiesFilter: action.payload
       };
     }
+
+    //eliminar actividad
+    case DELETE_ACTIVITY: {
+      const allActivities = state.allActivities.filter((element) => element.id !== action.payload);
+      return {
+        ...state,
+        allActivitiesFilter: allActivities
+      };
+    }
+    
 
     //Paginado
     case SET_CURRENT_PAGE:

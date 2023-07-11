@@ -14,7 +14,7 @@ const Actividad = lazy(() => import("../../Components/Actividad/Actividad"));
  * @returns {JSX.Element} Componente de la tarjeta de actividades.
  */
 const ActivityCard = () => {
-  const actividades = useSelector((state) => state.allActivities);
+  const actividades = useSelector((state) => state.allActivitiesFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {

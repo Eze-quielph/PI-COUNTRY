@@ -41,8 +41,8 @@ const deleteActivity = async (req, res) => {
     const resp = await deleteIdActivity(+id);
 
     resp
-      ? res.status(200).send(resp)
-      : res.status(201).send(resp);
+      ? res.status(200).json(resp)
+      : res.status(201).json(resp);
   } catch (error) {
     res.status(500).json(error);
   }

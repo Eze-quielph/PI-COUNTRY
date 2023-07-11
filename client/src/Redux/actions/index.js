@@ -10,6 +10,7 @@ export const ORDEN = "ORDEN";
 export const ADD_ACTIVITIES = "ADD_ACTIVITIES";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const DELETE_ACTIVITY = "DELETE_ACTIVITY"
 
 export const getCountry = () => {
   return async function (dispatch) {
@@ -98,8 +99,19 @@ export const getActivities = () => {
   };
 };
 
-//Paginado
+//delete de actividad
+export const deleteActivity = (id)=>{
+  return async(dispatch)=>{
+    try {
+      const {data} = await axios.delete(`http://localhost:3001/activities/${id}`)
+      return dispatch({type: DELETE_ACTIVITY, payload: data})
+    } catch (error) {
+      alert("Error " + error.response.data.error)
+    }
+  }
+}
 
+//Paginado
 export const setCurrentPage = (page) => {
   return {
     type: SET_CURRENT_PAGE,
