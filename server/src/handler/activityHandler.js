@@ -1,5 +1,6 @@
-const newPost = require('../utils/PostActivity');
-const { getAllActivity } = require('../utils/dbHelper');
+const newPost = require("../utils/PostActivity");
+const { getAllActivity } = require("../utils/dbHelper");
+const deleteIdActivity = require("../utils/deleteIdActivity");
 
 /**
  * Manejador de la ruta POST /activity.
@@ -34,7 +35,21 @@ const getActivity = async (req, res) => {
   }
 };
 
+const deleteActivity = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const resp = await deleteIdActivity(+id);
+
+    resp
+      ? res.status(200).send(resp)
+      : res.status(201).send(resp);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   postActivity,
   getActivity,
+  deleteActivity,
 };
