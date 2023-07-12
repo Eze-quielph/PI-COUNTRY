@@ -32,7 +32,7 @@ const Detail = () => {
 
   /**
    * Maneja el evento de clic en la tarjeta de actividades.
-   * Invierte el estado de visualización de actividades.
+   * Desactiva el estado de visualización de actividades.
    */
   const handleCardClick = () => {
     setShowActivities(!showActivities);

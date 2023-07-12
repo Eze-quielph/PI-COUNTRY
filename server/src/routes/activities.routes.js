@@ -1,10 +1,17 @@
-const ActivityRoute = require('express').Router()
-const {postActivity, getActivity, deleteActivity} = require('../handler/activityHandler')
+const ActivityRoute = require("express").Router();
+const {
+  postActivity,
+  getActivity,
+  deleteActivity,
+  updateActivity,
+} = require("../handler/activityHandler");
 
-ActivityRoute.post('/', postActivity)
+ActivityRoute.post("/", postActivity);
 
-ActivityRoute.get('/', getActivity)
+ActivityRoute.get("/", getActivity);
 
-ActivityRoute.delete('/:id', deleteActivity)
+ActivityRoute.delete("/:id", deleteActivity);
 
-module.exports = ActivityRoute
+ActivityRoute.put("/:id", updateActivity);
+
+module.exports = ActivityRoute;
