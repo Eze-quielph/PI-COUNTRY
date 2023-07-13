@@ -2,6 +2,7 @@ import style from "./Actividad.module.css";
 import { deleteActivity } from "../../Redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import {NavLink} from 'react-router-dom'
 
 const Actividad = ({ activity }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const Actividad = ({ activity }) => {
       <h3>{activity.duracion}</h3>
       {console.log(activity)}
       <button onClick={handleCardClick}>Eliminar</button>
+      <NavLink to={`/update/${activity.id}`}>
+        <button>Modificar Actividad</button>
+      </NavLink>
     </div>
   );
 };

@@ -9,7 +9,9 @@ import {
   GET_ACTIVITIES,
   FILTER_ACTIVITIES,
   SET_CURRENT_PAGE,
-  DELETE_ACTIVITY
+  DELETE_ACTIVITY,
+  UPDATE_ACTIVITY,
+  CLEAN_COUNTRIES,
 } from "../actions/index";
 
 const initialState = {
@@ -67,6 +69,13 @@ const rootReducer = (state = initialState, action) => {
         CountryFilter: continentFiltered,
       };
     }
+
+    case CLEAN_COUNTRIES:
+      return {
+        ...state,
+        CountryFilter: state.Countries,
+      };
+
     //filtro por actividad
     case FILTER_ACTIVITIES: {
       if (action.payload !== "All") {
@@ -138,19 +147,30 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allActivities: action.payload,
-        allActivitiesFilter: action.payload
+        allActivitiesFilter: action.payload,
       };
     }
 
     //eliminar actividad
     case DELETE_ACTIVITY: {
-      const allActivities = state.allActivities.filter((element) => element.id !== action.payload);
+      const allActivities = state.allActivities.filter(
+        (element) => element.id !== action.payload
+      );
+
+      // Actualizar el estado de countryDetail si es necesario
+      const updatedCountryDetail = { ...state.countryDetail };
+      if (updatedCountryDetail.Activities) {
+        updatedCountryDetail.Activities = updatedCountryDetail.Activities.filter(
+          (activity) => activity.id !== action.payload
+        );
+      }
+
       return {
         ...state,
-        allActivitiesFilter: allActivities
+        allActivitiesFilter: allActivities,
+        countryDetail: updatedCountryDetail,
       };
     }
-    
 
     //Paginado
     case SET_CURRENT_PAGE:
@@ -158,6 +178,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.payload,
       };
+
+    case UPDATE_ACTIVITY:
+      const updatedActivity = action.payload;
+      const updatedActivities = state.allActivitiesFilter.map((activity) => {
+        if (activity.id === updatedActivity.id) {
+          return updatedActivity;
+        }
+        return activity;
+      });
+      return {
+        ...state,
+        allActivitiesFilter: updatedActivities,
+      };
+
     default:
       return { ...state };
   }

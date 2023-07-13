@@ -5,6 +5,7 @@ import {
   Form,
   Detail,
   ActivityCard,
+  UpdateForm,
 } from "./Views/index";
 import NavBar from "./Components/Navbar/NavBar";
 import { useEffect } from "react";
@@ -23,11 +24,12 @@ function App() {
     <>
       {location.pathname !== "/" && <NavBar />}
       <Routes>
-        <Route path="/" element={<Inicio />}/>
+        <Route path="/" element={<Inicio />} />
         <Route path="/home" element={<HomeContainer />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/form" element={<Form />} />
         <Route path="/activity" element={<ActivityCard />} />
+        <Route path="/update/:id" element={<UpdateForm />} />
       </Routes>
     </>
   );

@@ -16,8 +16,6 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [showActivities, setShowActivities] = useState(false);
-
   const country = useSelector((state) => state.countryDetail);
 
   useEffect(() => {
@@ -30,11 +28,22 @@ const Detail = () => {
     };
   }, [dispatch, id]);
 
+  const [showActivities, setShowActivities] = useState(false);
+
+  useEffect(() => {
+    // Actualizar el estado de las actividades cuando el estado countryDetail cambie
+    if (country && country.Activities && country.Activities.length > 0) {
+      setShowActivities(true);
+    } else {
+      setShowActivities(false);
+    }
+  }, [country]);
+
   /**
-   * Maneja el evento de clic en la tarjeta de actividades.
-   * Desactiva el estado de visualización de actividades.
+   * Maneja el evento de clic en el botón de mostrar/ocultar actividades.
+   * Cambia el estado de visibilidad de las actividades.
    */
-  const handleCardClick = () => {
+  const handleToggleActivities = () => {
     setShowActivities(!showActivities);
   };
 
@@ -54,30 +63,26 @@ const Detail = () => {
           <NavLink to={"/home"} className={style.link}>
             <button className={style.button}>Home</button>
           </NavLink>
-          {/* Tarjeta de actividades */}
-          <div className={style.card}>
-            {!showActivities ? (
-              <button onClick={handleCardClick}>Lista de actividades</button>
-            ) : (
-              <button onClick={handleCardClick}>Cerrar</button>
-            )}
-            {/* Mostrar las actividades si showActivities es true */}
-            {showActivities && country.Activities && (
-              <div className={style.cardContent}>
-                {country.Activities.length > 0 ? (
-                  country.Activities.map((activity) => (
-                    <Actividad key={activity.id} activity={activity} />
-                  ))
-                ) : (
-                  <p>No hay actividades</p>
-                )}
-              </div>
-            )}
-          </div>
+          {/* Botón para mostrar u ocultar las actividades */}
+          <button className={style.button} onClick={handleToggleActivities}>
+            {showActivities ? "Ocultar actividades" : "Mostrar actividades"}
+          </button>
+          {/* Mostrar las actividades si showActivities es true */}
+          {showActivities && country.Activities && (
+            <div className={style.cardContent}>
+              {country.Activities.length > 0 ? (
+                country.Activities.map((activity) => (
+                  <Actividad key={activity.id} activity={activity} />
+                ))
+              ) : (
+                <p>No hay actividades</p>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         // Mostrar pantalla de carga si no hay detalles del país
-        <p>No hay Details del pais</p>
+        <p>No hay detalles del país</p>
       )}
     </div>
   );

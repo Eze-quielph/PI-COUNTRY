@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
-import { getCountryByName } from "../../Redux/actions/index";
+import { getCountryByName, cleanCountries } from "../../Redux/actions/index";
 import SearchBar from "./SearchBar/SearchBar";
 import CountryFilters from "./Filter/CountryFilter";
 import CountryOrder from "./Filter/CountryOrder";
@@ -32,6 +32,10 @@ const NavBar = () => {
   const handleChange = (event) => {
     setSearchString(event.target.value);
   };
+
+  const HandleFilter = ()=>{
+    dispatch(cleanCountries())
+  }
 
   return (
     <div className={style.divContainer}>
@@ -64,6 +68,7 @@ const NavBar = () => {
             <CountryFilters />
 
             <CountryOrder />
+            <button onClick={HandleFilter}>Limpiar Filtro</button>
           </div>
         </div>
       )}

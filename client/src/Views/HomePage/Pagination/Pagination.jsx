@@ -3,17 +3,30 @@ import React from "react";
 const Pagination = ({ itemsPerPage, totalItems, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
   return (
     <nav className="pagination">
-      {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-        <button
-          key={pageNumber}
-          className={`page-button ${pageNumber === currentPage ? "active" : ""}`}
-          onClick={() => onPageChange(pageNumber)}
-        >
-          {pageNumber}
+      {currentPage > 1 && (
+        <button className="page-button" onClick={handlePrevPage}>
+          Prev
         </button>
-      ))}
+      )}
+      {currentPage < totalPages && (
+        <button className="page-button" onClick={handleNextPage}>
+          Next
+        </button>
+      )}
     </nav>
   );
 };

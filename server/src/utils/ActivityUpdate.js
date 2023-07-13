@@ -10,18 +10,29 @@ const ActivityUpdate = async (
 ) => {
   try {
     const model = await Activity.findByPk(id);
-    console.log(model);
-    model.name = name;
-    model.dificultad = dificultad;
-    model.duracion = duracion;
-    model.tempodara = tempodara;
 
-    await model.setCountries(countryId);
+    if (name !== undefined) {
+      model.name = name;
+    }
+    if (dificultad !== undefined) {
+      model.dificultad = dificultad;
+    }
+    if (duracion !== undefined) {
+      model.duracion = duracion;
+    }
+    if (tempodara !== undefined) {
+      model.tempodara = tempodara;
+    }
+    if (countryId !== undefined) {
+      await model.setCountries(countryId);
+    }
+
     await model.save();
-    return true;
+    return model;
   } catch (error) {
     return `No se pudo actualizar el modelo, ocurrió el siguiente error: ${error}`;
   }
 };
 
 module.exports = ActivityUpdate;
+
