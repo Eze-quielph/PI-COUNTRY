@@ -37,6 +37,7 @@ const NavBar = () => {
     dispatch(cleanCountries())
   }
 
+ 
   return (
     <div className={style.divContainer}>
       <div className={style.navLinksContainer}>

@@ -18,7 +18,6 @@ const newPost = async (data, nameId) => {
     await newActivity.setCountries(nameId);
     return newActivity;
   } catch (error) {
-    console.error("Error al crear la nueva actividad:", error);
     throw error;
   }
 };

@@ -38,7 +38,7 @@ const getCountryByName = async (req, res) => {
       res.status(200).send(response);
     }
   } catch (error) {
-    res.status(400).json(error);
+    res.status(500).json(error);
   }
 };
 

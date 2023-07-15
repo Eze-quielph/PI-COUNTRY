@@ -20,15 +20,12 @@ const findCountryById = async (id) => {
     });
 
     if (!country) {
-      console.log("No se encontró ningún país con el ID especificado");
-      return null;
+      throw new Error("No se encontró ningún país con el ID especificado");
     }
 
-    console.log("País encontrado:");
-    console.log(country.toJSON());
     return country;
   } catch (error) {
-    console.error("Error al buscar el país por ID:", error);
+   
     throw error;
   }
 };
@@ -38,21 +35,26 @@ const findCountryById = async (id) => {
  * @param {string} name - El nombre del país a buscar.
  * @returns {Promise} Una promesa que se resuelve con los países encontrados.
  * @throws {Error} Si ocurre un error al buscar los países por nombre.
- */
+ */ 
 const getByName = async (name) => {
   try {
-    if (name) {
-      const countries = await Country.findAll({
-        where: { name: { [Op.iLike]: `%${name}%` } },
-      });
-      return countries;
-    } else {
+    if (!name) {
       throw new Error("No se proporcionó un nombre válido");
     }
+
+    const countries = await Country.findAll({
+      where: { name: { [Op.iLike]: `%${name}%` } },
+    });
+
+    if (countries.length === 0) {
+      throw new Error("No se encontró ningún país con ese nombre");
+    }
+
+    return countries;
   } catch (error) {
-    console.error("Error al buscar el país por nombre:", error);
     throw error;
   }
 };
+
 
 module.exports = { findCountryById, getByName };

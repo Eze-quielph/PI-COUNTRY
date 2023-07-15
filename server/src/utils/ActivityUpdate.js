@@ -30,7 +30,7 @@ const ActivityUpdate = async (
     await model.save();
     return model;
   } catch (error) {
-    return `No se pudo actualizar el modelo, ocurrió el siguiente error: ${error}`;
+    throw new Error(`No se pudo actualizar el modelo, ocurrió el siguiente error: ${error}`)
   }
 };
 

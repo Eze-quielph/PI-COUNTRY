@@ -38,11 +38,18 @@ const getActivity = async (req, res) => {
 const deleteActivity = async (req, res) => {
   const { id } = req.params;
   try {
+    if (!id || isNaN(id)) {
+      throw new Error("ID inválida o no numérica");
+    }
+    
     const resp = await deleteIdActivity(+id);
-
-    resp ? res.status(200).json(resp) : res.status(201).json(resp);
+    if (!resp) {
+      throw new Error("No se encontró ninguna actividad con el ID especificado");
+    }
+    
+    res.status(200).json(resp);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -54,7 +61,7 @@ const updateActivity = async (req, res) => {
     const resp = await ActivityUpdate(id, name, dificultad, duracion, tempodara, countryId);
     res.status(200).json(resp);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({error: error.message});
   }
 };
 

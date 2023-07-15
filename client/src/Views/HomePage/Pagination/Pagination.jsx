@@ -15,17 +15,35 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, onPageChange }) => 
     }
   };
 
+  const handleFirstPage = () => {
+    onPageChange(1);
+  };
+
+  const handleLastPage = () => {
+    onPageChange(totalPages);
+  };
+
   return (
     <nav className="pagination">
       {currentPage > 1 && (
-        <button className="page-button" onClick={handlePrevPage}>
-          Prev
-        </button>
+        <>
+          <button className="page-button" onClick={handleFirstPage}>
+            1
+          </button>
+          <button className="page-button" onClick={handlePrevPage}>
+            Prev
+          </button>
+        </>
       )}
       {currentPage < totalPages && (
-        <button className="page-button" onClick={handleNextPage}>
-          Next
-        </button>
+        <>
+          <button className="page-button" onClick={handleNextPage}>
+            Next
+          </button>
+          <button className="page-button" onClick={handleLastPage}>
+            {totalPages}
+          </button>
+        </>
       )}
     </nav>
   );
