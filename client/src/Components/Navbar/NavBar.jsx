@@ -67,7 +67,6 @@ const NavBar = () => {
           </div>
           <div className={style.filtersContainer}>
             <CountryFilters />
-
             <CountryOrder />
             <button onClick={HandleFilter}>Limpiar Filtro</button>
           </div>

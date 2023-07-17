@@ -24,23 +24,22 @@ const Form = () => {
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-  
+
     let updatedForm = {
       ...form,
       [property]: value,
     };
-  
+
     if (property === "pais") {
       updatedForm = {
         ...updatedForm,
         countryId: [...form.countryId, value],
       };
     }
-  
+
     setForm(updatedForm);
     setErrors(validate(updatedForm));
   };
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,6 +57,7 @@ const Form = () => {
     } else {
       alert("Por favor, completa todos los datos");
     }
+    event.target.reset()
   };
 
   const handleDelete = (element) => {
@@ -72,7 +72,12 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre: </label>
-          <select  id="name" name="name" value={form.name} onChange={handleChange}>
+          <select
+            id="name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+          >
             <option value="" disabled>
               Selecciona la actividad
             </option>
@@ -90,9 +95,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label htmlFor="dificultad" >Dificultad: </label>
+          <label htmlFor="dificultad">Dificultad: </label>
           <select
-          id="dificultad"
+            id="dificultad"
             name="dificultad"
             value={form.dificultad}
             onChange={handleChange}
@@ -113,13 +118,13 @@ const Form = () => {
         <div>
           <label htmlFor="duracion">Duración (en Horas): </label>
           <input
-          id="duracion"
+            id="duracion"
             type="number"
             name="duracion"
             value={form.duracion}
             onChange={handleChange}
             min={1}
-            max={6}
+            max={5}
           />
           {errors.duracion && <p className={styles.error}>{errors.duracion}</p>}
         </div>
@@ -140,14 +145,19 @@ const Form = () => {
             <option value="Invierno">Invierno</option>
             <option value="Primavera">Primavera</option>
           </select>
-          {errors.tempodara && <p className={styles.error}>{errors.tempodara}</p>}
+          {errors.tempodara && (
+            <p className={styles.error}>{errors.tempodara}</p>
+          )}
         </div>
         <div className={styles.line}>
           <label htmlFor="pais">País / Países: </label>
-          <select name="pais" id="pais" className={styles.select} onChange={handleChange}>
-            <option value="" disabled>
-              Seleccioná el/los países
-            </option>
+          <select
+            name="pais"
+            id="pais"
+            className={styles.select}
+            onChange={handleChange}
+          >
+            <option value="">Selecciona el pais</option>
             {allCountries?.map((country) => (
               <option value={country.id} key={country.id}>
                 {country.name}

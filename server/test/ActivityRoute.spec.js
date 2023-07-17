@@ -9,7 +9,7 @@ describe("GET /activities", () => {
 });
 
 describe("DELETE /activities/:id", () => {
-  const idValid = 1;
+  const idValid = 3;
   const idInvalid = "a";
   it("responds with 200", async () => {
     const res = await request(server).delete(`/activities/${idValid}`);
@@ -26,7 +26,7 @@ describe("POST /activities", () => {
     dificultad: 1,
     duracion: 2,
     tempodara: "Invierno",
-    countryId: ["c8978db6-72f8-489a-a90c-f9b3ac735a47"],
+    countryId: ["319ff372-cd22-4adf-9a5f-b39ca659f2e6"],
   };
   const postInvalid = {
     name: "Test2",

@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     width: 40vh;
-    height: 40vh;
+    height: 80vh;
     padding: 20px; /* Agrega un espacio interno para separar el contenido de los bordes */
     margin: 20px;
   }

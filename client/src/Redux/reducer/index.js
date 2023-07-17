@@ -167,6 +167,7 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
+        allActivities: allActivities,
         allActivitiesFilter: allActivities,
         countryDetail: updatedCountryDetail,
       };
@@ -190,6 +191,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allActivitiesFilter: updatedActivities,
+        allActivities: updatedActivities,
       };
 
     default:

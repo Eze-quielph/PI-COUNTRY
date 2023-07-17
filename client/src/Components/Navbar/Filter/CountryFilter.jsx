@@ -10,7 +10,6 @@ import style from "./CountryOrder.module.css";
  */
 const CountryFilters = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.allActivities);
 
   // Opciones para el filtro de continentes
   const continenteOptions = [
@@ -54,7 +53,7 @@ const CountryFilters = () => {
    */
   const handleFilterActivity = (event) => {
     dispatch(filterActivities(event.target.value));
-    console.log(countries);
+
   };
 
   return (

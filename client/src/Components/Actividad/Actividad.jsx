@@ -10,7 +10,7 @@ const Actividad = ({ activity }) => {
 
   useEffect(() => {
     if (eliminar) {
-      dispatch(deleteActivity(activity.id));
+      dispatch(deleteActivity(activity.id))
     }
   }, [dispatch, eliminar, activity.id]);
   
@@ -18,14 +18,19 @@ const Actividad = ({ activity }) => {
   const handleCardClick = () => {
     setEliminar(!eliminar);
   };
+  
   return (
     <div className={style.container}>
-      <h3 className={style.title}>{activity.name}</h3>
-      <h3 className={style.title}>{activity.id}</h3>
-      <h3 className={style.title}>{activity.dificultad}</h3>
-      <h3 className={style.title}>{activity.tempodara}</h3>
-      <h3>{activity.duracion}</h3>
-      {console.log(activity)}
+      <h3 className={style.title}>Name: {activity.name}</h3>
+      <h3 className={style.title}>Dificultad: {activity.dificultad}</h3>
+      <h3 className={style.title}>Tempodara: {activity.tempodara}</h3>
+      <h3>Duracion: {activity.duracion}</h3>
+      <h3>Paises relacionados:</h3>
+      <div>
+      {activity.Countries && activity.Countries.map((element)=>(
+        <h3 key={element.id}>{element.name}</h3>
+      ))}
+      </div>
       <button onClick={handleCardClick}>Eliminar</button>
       <NavLink to={`/update/${activity.id}`}>
         <button>Modificar Actividad</button>

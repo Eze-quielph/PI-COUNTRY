@@ -2,7 +2,7 @@ const server = require("../src/server");
 const request = require("supertest");
 
 describe("GET /countries/:id", () => {
-    const validId = "c8978db6-72f8-489a-a90c-f9b3ac735a47";
+    const validId = "319ff372-cd22-4adf-9a5f-b39ca659f2e6";
     const invalidId = "c8978db6-72f8-489a-a90c-f9b3ac735a67";
   
     it("should respond with a 200 status code for a valid ID", async () => {
@@ -12,7 +12,7 @@ describe("GET /countries/:id", () => {
   
     it("should respond with the correct country name for a valid ID", async () => {
       const response = await request(server).get(`/countries/${validId}`).send();
-      expect(response.body.name).toBe("Afghanistan");
+      expect(response.body.name).toBe("Pakistan");
     });
   
     it("should respond with a 500 status code for an invalid ID", async () => {
