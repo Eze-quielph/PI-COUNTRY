@@ -5,10 +5,10 @@
     flex-wrap: wrap;
     margin: 30px;
    
-    transition: transform 0.3s ease; /* Agrega una transición suave al hacer hover */
+    transition: transform 0.3s ease; 
 }
 .container:hover{
-    transform: scale(1.05);
+    transform: scale(1.025);
    
 }
 
