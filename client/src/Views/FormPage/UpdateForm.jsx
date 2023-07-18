@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import validate from "./Validate";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateActivity } from "../../Redux/actions";
-import styles from "./Form.module.css";
+import styles from "./UpdateForm.module.css";
 
 const UpdateForm = () => {
   const allCountries = useSelector((state) => state.Countries);
@@ -19,6 +18,8 @@ const UpdateForm = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   const handleChange = (event) => {
     const property = event.target.name;
@@ -37,12 +38,12 @@ const UpdateForm = () => {
     }
 
     setForm(updatedForm);
-    setIsFormValid(updatedForm.name !== ""); // Verificar si se selecciona al menos un elemento
+    setIsFormValid(updatedForm.name !== "" || Object.values(updatedForm).some((val) => val !== "" && val !== "Selecciona la actividad")); // Verificar si se selecciona al menos un elemento diferente al valor predeterminado
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     if (isFormValid) {
       const { name, dificultad, duracion, tempodara, countryId } = form;
       const updatedActivity = {
@@ -53,9 +54,9 @@ const UpdateForm = () => {
         ...(tempodara && { tempodara }),
         ...(countryId.length > 0 && { countryIds: countryId }),
       };
-  
+
       dispatch(updateActivity(id, updatedActivity));
-  
+
       setForm({
         name: "",
         dificultad: "",
@@ -63,12 +64,13 @@ const UpdateForm = () => {
         tempodara: "",
         countryId: [],
       });
-      alert("La actividad se actualizó con éxito");
+      setShowSuccessAlert(true); // Mostrar alerta de éxito
+      setShowErrorAlert(false); // Ocultar alerta de error
     } else {
-      alert("Por favor, selecciona al menos un elemento");
+      setShowSuccessAlert(false); // Ocultar alerta de éxito
+      setShowErrorAlert(true); // Mostrar alerta de error
     }
   };
-  
 
   const handleDelete = (element) => {
     setForm({
@@ -79,6 +81,16 @@ const UpdateForm = () => {
 
   return (
     <div className={styles.formContainer}>
+      {showSuccessAlert && (
+        <div className={styles.alertSuccess}>
+          La actividad se actualizó con éxito.
+        </div>
+      )}
+      {showErrorAlert && (
+        <div className={styles.alertError}>
+          <p className={styles.message}>Por favor, selecciona al menos un elemento.</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre: </label>
@@ -101,7 +113,6 @@ const UpdateForm = () => {
             <option value="Museum Circuit">Museum Circuit</option>
             <option value="Free Choice">Free Choice</option>
           </select>
-          
         </div>
 
         <div>
@@ -121,8 +132,8 @@ const UpdateForm = () => {
             <option value="4">4 (Dificultad Elevada)</option>
             <option value="5">5 (Dificultad Extrema)</option>
           </select>
-          
         </div>
+
         <div>
           <label htmlFor="duracion">Duración (en Horas): </label>
           <input
@@ -134,7 +145,6 @@ const UpdateForm = () => {
             min={1}
             max={6}
           />
-         
         </div>
 
         <div>
@@ -153,8 +163,8 @@ const UpdateForm = () => {
             <option value="Invierno">Invierno</option>
             <option value="Primavera">Primavera</option>
           </select>
-         
         </div>
+
         <div className={styles.line}>
           <label htmlFor="pais">País / Países: </label>
           <select
@@ -172,7 +182,7 @@ const UpdateForm = () => {
               </option>
             ))}
           </select>
-          
+
           <div>
             {form.countryId?.map((element) => (
               <div key={element}>
@@ -187,6 +197,7 @@ const UpdateForm = () => {
             ))}
           </div>
         </div>
+
         <div>
           <button type="submit">Actualizar Actividad</button>
         </div>

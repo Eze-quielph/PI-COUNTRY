@@ -69,10 +69,11 @@ const Form = () => {
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.card}>
           <label htmlFor="name">Nombre: </label>
           <select
+           className={styles.select}
             id="name"
             name="name"
             value={form.name}
@@ -94,13 +95,14 @@ const Form = () => {
           {errors.name && <p className={styles.error}>{errors.name}</p>}
         </div>
 
-        <div>
-          <label htmlFor="dificultad">Dificultad: </label>
+        <div className={styles.card}>
+          <label htmlFor="dificultad" >Dificultad: </label>
           <select
             id="dificultad"
             name="dificultad"
             value={form.dificultad}
             onChange={handleChange}
+            className={styles.select}
           >
             <option value="" disabled>
               Seleccione un valor
@@ -115,7 +117,7 @@ const Form = () => {
             <p className={styles.error}>{errors.dificultad}</p>
           )}
         </div>
-        <div>
+        <div className={styles.card}>
           <label htmlFor="duracion">Duración (en Horas): </label>
           <input
             id="duracion"
@@ -129,13 +131,14 @@ const Form = () => {
           {errors.duracion && <p className={styles.error}>{errors.duracion}</p>}
         </div>
 
-        <div>
+        <div className={styles.card}>
           <label htmlFor="tempodara">Temporada: </label>
           <select
             name="tempodara"
             id="tempodara"
             value={form.tempodara}
             onChange={handleChange}
+            className={styles.select}
           >
             <option value="" disabled>
               Seleccione un valor
@@ -149,7 +152,7 @@ const Form = () => {
             <p className={styles.error}>{errors.tempodara}</p>
           )}
         </div>
-        <div className={styles.line}>
+        <div className={styles.card}>
           <label htmlFor="pais">País / Países: </label>
           <select
             name="pais"
@@ -165,7 +168,7 @@ const Form = () => {
             ))}
           </select>
           {errors.pais && <p className={styles.error}>{errors.pais}</p>}
-          <div>
+          <div className={styles.card}>
             {form.countryId?.map((element) => (
               <div key={element}>
                 <button
@@ -180,7 +183,7 @@ const Form = () => {
           </div>
         </div>
         <div>
-          <button type="submit">Crear Actividad</button>
+          <button type="submit" className={styles.submit}>Crear Actividad</button>
         </div>
       </form>
     </div>

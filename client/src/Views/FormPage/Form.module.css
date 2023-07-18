@@ -1,46 +1,107 @@
+/* Form.module.css */
+
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-  }
-  
-  .formContainer label {
-    margin-bottom: 10px;
-  }
-  
-  .formContainer select,
-  .formContainer input {
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .formContainer select:hover,
-  .formContainer input:hover {
-    transform: scale(1.1);
-  }
-  
-  .formContainer button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    color: #333;
-    text-decoration: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-    margin-top: 10px;
-  }
-  
-  .formContainer button:hover {
-    transform: scale(1.1);
-  }
-  
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 400px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.submit {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #45a049;
+}
+
+
+.formContainer {
+  margin: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.select {
+  width: 200px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.alertSuccess {
+  background-color: #dff0d8;
+  border: 1px solid #3c763d;
+  color: #3c763d;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.alertError {
+  background-color: #f2dede;
+  border: 1px solid #a94442;
+  color: #a94442;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin: 0;
+}
+
+.submit {
+  background-color: #337ab7;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #286090;
+}
