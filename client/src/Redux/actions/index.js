@@ -20,7 +20,7 @@ export const CLEAN_COUNTRIES = 'CLEAN_COUNTRIES'
 export const getCountry = () => {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/countries`);
+      const response = await axios(`https://pi-country-production-1156.up.railway.app/countries`);
       const country = response.data;
       dispatch({
         type: GET_COUNTRY,
@@ -39,7 +39,7 @@ export const getCountry = () => {
 export const getCountryByName = (name) => {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/countries/?name=${name}`);
+      const response = await axios(`https://pi-country-production-1156.up.railway.app/countries/?name=${name}`);
       const data = response.data;
       dispatch({
         type: GET_BY_NAME,
@@ -67,7 +67,7 @@ export const cleanCountries = () => {
 export const getCountryDetails = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/countries/${id}`);
+      const response = await axios(`https://pi-country-production-1156.up.railway.app/countries/${id}`);
       const country = response.data;
       dispatch({
         type: GET_COUNTRY_DETAILS,
@@ -128,7 +128,7 @@ export const filterOrder = (payload) => {
 export const addActivity = (activities) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/activities", activities);
+      const { data } = await axios.post("https://pi-country-production-1156.up.railway.app/activities", activities);
       return dispatch({ type: ADD_ACTIVITIES, payload: data });
     } catch (error) {
       alert("Error: " + error.response.data.error);
@@ -142,7 +142,7 @@ export const addActivity = (activities) => {
 export const getActivities = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/activities");
+      const { data } = await axios.get("https://pi-country-production-1156.up.railway.app/activities");
       return dispatch({ type: GET_ACTIVITIES, payload: data });
     } catch (error) {
       alert("Error: " + error.response.data.error);
@@ -157,7 +157,7 @@ export const getActivities = () => {
 export const deleteActivity = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`http://localhost:3001/activities/${id}`);
+      const { data } = await axios.delete(`https://pi-country-production-1156.up.railway.app/activities/${id}`);
       return dispatch({ type: DELETE_ACTIVITY, payload: data });
     } catch (error) {
       alert("Error: " + error.response.data.error);
@@ -173,7 +173,7 @@ export const deleteActivity = (id) => {
 export const updateActivity = (id, body) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`http://localhost:3001/activities/${id}`, body);
+      const { data } = await axios.put(`https://pi-country-production-1156.up.railway.app/activities/${id}`, body);
       return dispatch({ type: UPDATE_ACTIVITY, payload: data });
     } catch (error) {
       alert("Error: " + error.response.data.error);
