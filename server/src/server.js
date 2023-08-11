@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const server = express();
 
+server.disable("x-powered-by")
+
 server.use(morgan("dev"));
 server.use(express.json());
 server.use(cors());
